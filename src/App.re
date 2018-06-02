@@ -7,16 +7,16 @@ let component = ReasonReact.reducerComponent("App");
 
 let make = _children => {
   ...component,
-  didMount: self => {
-    Js.Promise.then_(
-      data => {
-        self.send(Fetch(data));
-        Js.Promise.resolve(data);
-      },
-      Api.getData(),
-    );
-    ();
-  },
+  didMount: self =>
+    ignore(
+      Js.Promise.then_(
+        data => {
+          self.send(Fetch(data));
+          Js.Promise.resolve(data);
+        },
+        Api.getData(),
+      ),
+    ),
   initialState: () => {dojos: [||]},
   reducer: (action, _state) =>
     switch (action) {

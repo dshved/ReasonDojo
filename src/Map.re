@@ -1,22 +1,7 @@
-[@bs.module "react-simple-maps"]
-external composableMap : ReasonReact.reactClass = "ComposableMap";
-
-[@bs.module "react-simple-maps"]
-external zoomableGroup : ReasonReact.reactClass = "ZoomableGroup";
-
-[@bs.module "react-simple-maps"]
-external geographies : ReasonReact.reactClass = "Geographies";
-
-[@bs.module "react-simple-maps"]
-external geographyComponent : ReasonReact.reactClass = "Geography";
-
-[@bs.module "react-simple-maps"]
-external markerComponent : ReasonReact.reactClass = "Marker";
-
-[@bs.module "react-simple-maps"]
-external markersComponent : ReasonReact.reactClass = "Markers";
-
 module ComposableMap = {
+  [@bs.module "react-simple-maps"]
+  external reactClass : ReasonReact.reactClass = "ComposableMap";
+
   [@bs.deriving abstract]
   type jsProps = {
     width: int,
@@ -24,22 +9,28 @@ module ComposableMap = {
   };
   let make = (~width, ~height, children) =>
     ReasonReact.wrapJsForReason(
-      ~reactClass=composableMap,
+      ~reactClass,
       ~props=jsProps(~width, ~height),
       children,
     );
 };
 
 module ZoomableGroup = {
+  [@bs.module "react-simple-maps"]
+  external reactClass : ReasonReact.reactClass = "ZoomableGroup";
+
   let make = children =>
     ReasonReact.wrapJsForReason(
-      ~reactClass=zoomableGroup,
+      ~reactClass,
       ~props=Js.Dict.empty(),
       children,
     );
 };
 
 module Geographies = {
+  [@bs.module "react-simple-maps"]
+  external reactClass : ReasonReact.reactClass = "Geographies";
+
   [@bs.deriving abstract]
   type jsProps = {geography: string};
   [@bs.deriving abstract]
@@ -47,13 +38,16 @@ module Geographies = {
   type projection;
   let make = (~geography, children) =>
     ReasonReact.wrapJsForReason(
-      ~reactClass=geographies,
+      ~reactClass,
       ~props=jsProps(~geography),
       children,
     );
 };
 
 module Geography = {
+  [@bs.module "react-simple-maps"]
+  external reactClass : ReasonReact.reactClass = "Geography";
+
   [@bs.deriving abstract]
   type jsProps = {
     geography: Geographies.geography,
@@ -61,7 +55,7 @@ module Geography = {
   };
   let make = (~geography, ~projection, children) =>
     ReasonReact.wrapJsForReason(
-      ~reactClass=geographyComponent,
+      ~reactClass,
       ~props=jsProps(~geography, ~projection),
       children,
     );
@@ -75,20 +69,26 @@ module MarkerData = {
 };
 
 module Marker = {
+  [@bs.module "react-simple-maps"]
+  external reactClass : ReasonReact.reactClass = "Marker";
+
   [@bs.deriving abstract]
   type jsProps = {marker: MarkerData.marker};
   let make = (~marker, children) =>
     ReasonReact.wrapJsForReason(
-      ~reactClass=markerComponent,
+      ~reactClass,
       ~props=jsProps(~marker),
       children,
     );
 };
 
 module Markers = {
+  [@bs.module "react-simple-maps"]
+  external reactClass : ReasonReact.reactClass = "Markers";
+
   let make = children =>
     ReasonReact.wrapJsForReason(
-      ~reactClass=markersComponent,
+      ~reactClass,
       ~props=Js.Dict.empty(),
       children,
     );
