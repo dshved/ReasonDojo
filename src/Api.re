@@ -2,10 +2,10 @@ let apiEndpoint = "http://immense-river-25513.herokuapp.com/locations";
 
 type dojoLocation = {
   username: string,
-  location: (float, float),
+  location: Map.coordinates,
 };
 
-let decodeLocaton = json => {
+let decodeLocaton = (json: Js.Json.t) : dojoLocation => {
   open! Json.Decode;
   {
     username: json |> field("username", string),
